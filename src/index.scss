@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'W95';
+  src: url('fonts/W95.woff2') format('woff2'),
+      url('fonts/W95.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+* {
+  box-sizing: border-box;
+  font-family: W95;
+}
+
+body {
+  height: 100vh;
+  background: url('img/w95-bg.jpg') no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  margin: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

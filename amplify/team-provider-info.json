@@ -1,0 +1,20 @@
+{
+    "knowit": {
+        "awscloudformation": {
+            "AuthRoleName": "escape-room-knowit-20200130081837-authRole",
+            "UnauthRoleArn": "arn:aws:iam::236226693825:role/escape-room-knowit-20200130081837-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::236226693825:role/escape-room-knowit-20200130081837-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "escape-room-knowit-20200130081837-deployment",
+            "UnauthRoleName": "escape-room-knowit-20200130081837-unauthRole",
+            "StackName": "escape-room-knowit-20200130081837",
+            "StackId": "arn:aws:cloudformation:eu-west-1:236226693825:stack/escape-room-knowit-20200130081837/bc2df0c0-4330-11ea-b8d9-0641c159a77a",
+            "AmplifyAppId": "d35izy264mcvbo"
+        },
+        "categories": {
+            "auth": {
+                "escaperoom176ae349": {}
+            }
+        }
+    }
+}

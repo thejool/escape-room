@@ -1,0 +1,41 @@
+{
+	"auth": {
+		"escaperoom176ae349": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"function": {
+		"S3Trigger3c6eee69": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
+	},
+	"storage": {
+		"escapeRoomAuth": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "S3Trigger3c6eee69",
+					"attributes": [
+						"Name",
+						"Arn",
+						"LambdaExecutionRole"
+					]
+				}
+			]
+		}
+	},
+	"predictions": {
+		"escapeRoomIdentifyLabels": {
+			"providerPlugin": "awscloudformation",
+			"service": "Rekognition",
+			"dependsOn": [],
+			"identifyType": "identifyLabels"
+		}
+	}
+}

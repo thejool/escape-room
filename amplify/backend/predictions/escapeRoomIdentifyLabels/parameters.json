@@ -1,0 +1,15 @@
+{
+    "resourceName": "escapeRoomIdentifyLabels",
+    "identifyPolicyName": "identifyPolicyca25a61b",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "adminAuthProtected": "DISALLOW",
+    "adminGuestProtected": "DISALLOW",
+    "identifyType": "identifyLabels",
+    "access": "authAndGuest",
+    "type": "LABELS"
+}
