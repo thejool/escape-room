@@ -11,6 +11,42 @@
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true
+		},
+		"correctCompetitionResponse": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "escapeRoomResponses",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				},
+				{
+					"category": "auth",
+					"resourceName": "escaperoom176ae349",
+					"attributes": [
+						"UserPoolId"
+					]
+				},
+				{
+					"category": "function",
+					"resourceName": "S3Trigger3c6eee69",
+					"attributes": [
+						"Name"
+					]
+				},
+				{
+					"category": "storage",
+					"resourceName": "escapeRoomAuth",
+					"attributes": [
+						"BucketName"
+					]
+				}
+			]
 		}
 	},
 	"storage": {
@@ -28,6 +64,10 @@
 					]
 				}
 			]
+		},
+		"escapeRoomResponses": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
 		}
 	},
 	"predictions": {
@@ -36,6 +76,22 @@
 			"service": "Rekognition",
 			"dependsOn": [],
 			"identifyType": "identifyLabels"
+		}
+	},
+	"api": {
+		"escapeRoom": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "correctCompetitionResponse",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
 		}
 	}
 }

@@ -6,7 +6,7 @@ const withWindow = Window => {
     return (
       <Draggable
         handle=".window__header__handle"
-        defaultPosition={{ x: 160, y: -200 }}
+        defaultPosition={{ x: 160, y: 100 }}
         scale={1}
         //onStart={handleStart}
         //onDrag={handleDrag}

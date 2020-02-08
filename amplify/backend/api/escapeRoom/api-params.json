@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/competitions",
+            "lambdaFunction": "correctCompetitionResponse",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "escapeRoom",
+    "apiName": "escapeRoom",
+    "functionArns": [
+        {
+            "lambdaFunction": "correctCompetitionResponse"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "escape-room-knowit-20200130081837-authRole",
+        "unAuthRoleName": "escape-room-knowit-20200130081837-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "correctCompetitionResponse",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

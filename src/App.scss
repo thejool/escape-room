@@ -5,6 +5,7 @@
   background: none;
   border: none;
   display: block;
+  position: absolute;
   
   &__img {
     height: 50px;
@@ -70,7 +71,9 @@
   margin: 0;
   height: 100%;
   width: 100%;
+  font-family: arial
 }
+
 
 .snake-menu {
   position: absolute;
@@ -160,6 +163,72 @@
   left: 20px;
 } */
 
+.login-screen,
+.loading-screen {
+  background: #000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.login-screen {
+  background: #00309c;
+}
+
+.treasure { 
+  background: #000000;
+  height: 100%;
+  padding: 10px;
+
+  .treasure--input {
+    display: block;
+    overflow: hidden;
+    margin: 15px;
+
+    input {
+      border: 0;
+      padding: 0 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      color: #fff;
+      margin-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      height: 34px;
+      float: left;
+    }
+
+    button {
+      padding: 0 14px;
+      background: #006900;
+      border: 0;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 9px;
+      height: 34px;
+      float: left;
+    }
+  }
+}
+
+.app-teamname {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+  color: #fff;
+}
 
 .app-footer {
   background: #c3c3c3;
@@ -242,6 +311,12 @@
   cursor: crosshair;
 }
 
-.code * {
-  font-family: arial, sans-serif;
+.CodeMirror,
+.ReactCodeMirror,
+.code {
+  height: 100%;
+
+  * {
+   font-family: arial, sans-serif;
+  }
 }

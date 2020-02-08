@@ -23,7 +23,7 @@ const InternetExplorer = ({initialAddress, onClose}) => {
   return (
     <Draggable
       handle=".internet-explorer__handle"
-      defaultPosition={{ x: 110, y: -400 }}
+      defaultPosition={{ x: 110, y: 100 }}
       scale={1}
     >
       <div className="internet-explorer">

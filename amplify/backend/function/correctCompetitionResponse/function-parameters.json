@@ -1,0 +1,34 @@
+{
+    "permissions": {
+        "auth": {
+            "escaperoom176ae349": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ]
+        },
+        "function": {
+            "S3Trigger3c6eee69": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ]
+        },
+        "storage": {
+            "escapeRoomAuth": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "escapeRoomResponses": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ]
+        }
+    }
+}

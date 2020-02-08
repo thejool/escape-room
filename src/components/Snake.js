@@ -64,13 +64,13 @@ function Snake(props) {
   const drawHead = () => {
     switch (direction) {
       case 'n':
-        return '▲'
+        return 'A'
       case 's':
-        return '▼ '
+        return 'V'
       case 'e':
-        return '▶ '
+        return '>'
       case 'w':
-        return '◀ '
+        return '<'
       default:
         return null
     }
@@ -80,7 +80,7 @@ function Snake(props) {
     board += ' '
     for (let j = 0; j < boardSize.x; j++) {
       if (snakeMap[j] && snakeMap[j][i]) {
-        board += j === head[0] && i === head[1] ? drawHead() : '▣ '
+        board += j === head[0] && i === head[1] ? drawHead() : '0'
       } else if (food && j === food[0] && i === food[1]) {
         board += 'X '
       } else {
