@@ -1,15 +1,6 @@
-@font-face {
-  font-family: 'W95';
-  src: url('fonts/W95.woff2') format('woff2'),
-      url('fonts/W95.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
 * {
   box-sizing: border-box;
-  font-family: W95;
+  font-family: Tahoma,Verdana,Segoe,sans-serif; 
 }
 
 body {

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import w95Logo from '../img/w95-logo.png'
+import xpLogo from '../img/xp-logo.png'
 import StartMenu from './StartMenu'
 
 const StartButton = (props) => {
@@ -22,18 +22,18 @@ const StartButton = (props) => {
     }
   }, [showMenu])
 
-
   return (
     <div className="app-footer__start" ref={ref}>
-      {showMenu && <StartMenu />}
+      {showMenu && false && <StartMenu />}
 
       <button className="app-footer__start-button" onClick={() => setShowMenu(!showMenu)}>
-        <img src={w95Logo} alt="Windows 95" className="app-footer__start-button__img" />
+        <img src={xpLogo} alt="Windows XP" className="app-footer__start-button__img" />
         
         <span className="app-footer__start-button__text">
           Start
         </span>
       </button>
+
     </div>
   )
 }

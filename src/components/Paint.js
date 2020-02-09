@@ -8,13 +8,12 @@ import { getImageByteData, canvasToImage } from '../helpers'
 import uuid from 'uuid/v1'
 
 const Paint = (props) => {
-  const [src, setSrc] = useState()
   const ref = useRef(null)
 
   const saveDrawing = () => {
     const arrayBuffer = getImageByteData("canvas", 0.5)
     const file = `doodles/${uuid()}.jpg`
-    console.log(file, arrayBuffer)
+
     uploadToS3(file, arrayBuffer)
   }
 
@@ -29,13 +28,19 @@ const Paint = (props) => {
       }
     }).then(response => {
         const { labels } = response
+        let correct = false
         console.log(labels)
         labels.forEach(object => {
           const { name, metadata } = object
           if(name === 'Face' && metadata.confidence > 80) {
-            alert('Perfect, you painted a face! Here is your code: 2046')
+            correct = true
+            alert('Wow, you painted Per beautifully! Here is your code: 1093')
           }
         })
+
+        if(!correct && labels.length >= 0) {
+          alert('Hmm it looks like you painted a ' + labels[0].name)
+        }
     }).catch(err => console.log('fel', err))
   }
 
@@ -54,11 +59,13 @@ const Paint = (props) => {
   return (
     <div className="paint">
       <button onClick={saveDrawing}>Save</button>
+      <button onClick={() => ref.current.clear()}>Clear</button>
+      <button onClick={() => ref.current.undo()}>Undo</button>
       <CanvasDraw 
         ref={ref} 
         // canvasWidth={791} 
         canvasWidth="100%"
-        canvasHeight={417} 
+        canvasHeight={462} 
         lazyRadius={0} 
         hideGrid={true}
         brushRadius={4}

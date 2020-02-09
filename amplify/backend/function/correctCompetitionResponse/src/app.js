@@ -152,9 +152,12 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
 
 app.put(path, function(req, res) {
   const correctCodes = {
-    'ABCD': 'paint',
-    '1337': 'morse',
-    '2020': 'fizzBuzz'
+    '5983': 'Snake',
+    '8912': 'Fizz Buzz',
+    '0912': 'Swagger',
+    '1093': 'Paint',
+    '3209': 'QR KOD',
+    '0X0000008E': 'Blue Screen',
   }
 
   if (userIdPresent) {
@@ -169,7 +172,7 @@ app.put(path, function(req, res) {
   if(req.body.scores) {
     req.body.scores.map((score) => {
       if(correctCodes[score]) {
-        result[correctCodes[score]] = true
+        result[correctCodes[score]] = score
       }
     })
   }
@@ -179,9 +182,11 @@ app.put(path, function(req, res) {
 
   let putItemParams = {
     TableName: tableName,
-    Item: result
+    Item: result,
+    ReturnValues: 'ALL_OLD',
   }
   dynamodb.put(putItemParams, (err, data) => {
+    console.log(data)
     if(err) {
       res.statusCode = 500;
       res.json({error: err, url: req.url, body: req.body});

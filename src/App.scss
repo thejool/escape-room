@@ -18,18 +18,20 @@
 }
 
 .window {
-  background: url('img/window.png') #eee no-repeat;
+  background: url('img/window.png') transparent no-repeat;
   background-size: contain;
-  width: 824px;
-  height: 503px;
+  width: 790px;
+  height: 550px;
   z-index: 2;
-  padding: 53px 26px 33px 7px;
+  padding: 55px 4px 25px 7px;
   box-sizing: border-box;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 
   &__content {
     height: 100%;
     width: 100%;
-    float: left;
+    background: #ffffff;
   }
 
   &__header {
@@ -41,17 +43,16 @@
     padding: 6px 5px 8px;
     
     &__handle {
-      background: #020080;
-      width: 90%;
+      width: 87%;
       height: 100%;
       float: left;
       color: #fff;
-      padding-left: 10px;
-      font-size: 11px;
+      font-size: 12px;
+      padding: 3px 22px;
     }
     
     &__actions {
-      width: 40px;
+      width: 50px;
       height: 28px;
       float: right;
       
@@ -71,7 +72,30 @@
   margin: 0;
   height: 100%;
   width: 100%;
-  font-family: arial
+  font-family: arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__game {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    width: 460px;
+    height: 435px;
+    margin: 0;
+    position: relative;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: -4px;
+      right: 14px;
+      bottom: -4px;
+      left: 0px;
+      border: 1px solid #2dc32d;
+    }
+  }
 }
 
 
@@ -81,7 +105,7 @@
   right: 26px;
   bottom: 33px;
   left: 7px;
-  background: rgba(0,0,0,.95);
+  background: rgba(0,0,0,.65);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,13 +126,17 @@
 
 
 .internet-explorer {
-  background: url('img/ie-frame.png') #eee no-repeat;
+  background: url('img/ie-frame.png') transparent no-repeat;
   background-size: cover;
   width: 1100px;
   height: 755px;
   z-index: 2;
-  padding: 177px 6px 50px 5px;
+  padding: 164px 6px 50px 5px;
   box-sizing: border-box;
+
+  iframe {
+
+  }
   
   &__handle {
     height: 42px;
@@ -120,12 +148,12 @@
 
   &__input {
     position: absolute;
-    left: 102px;
-    top: 141px;
-    width: 77%;
+    left: 107px;
+    top: 135px;
     border: 0;
     height: 26px;
     font-size: 15px;
+    width: 73%;
   }
 
   &__close {
@@ -138,7 +166,19 @@
     border: 0;
     padding: 0;
   }
+ 
+  &__go {
+    position: absolute;
+    background: 0;
+    border: 0;
+    padding: 0;
+    top: 132px;
+    right: 77px;
+    height: 32px;
+    width: 80px;
+  }
 
+  iframe, 
   &__browser {
     background: #eee;
     width: 100%;
@@ -163,8 +203,12 @@
   left: 20px;
 } */
 
+.blue-screen,
+.finished-screen,
+.blue-screen--loading,
 .login-screen,
 .loading-screen {
+  z-index: 2;
   background: #000;
   position: absolute;
   top: 0;
@@ -180,16 +224,64 @@
   }
 }
 
+.blue-screen--loading {
+  background: transparent;
+  cursor: progress;
+
+  * {
+    cursor: progress;
+  }
+}
+
+.blue-screen {
+  background: #0500ad; 
+}
+
+.congratz-close {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.congratz {
+  position: absolute;
+  color: #ffffff;
+  text-align: center;
+
+  a {
+    display: block;
+    margin-top: 10px;
+    color: #ffffff;
+    // text-decoration: none;
+  }
+}
+
 .login-screen {
-  background: #00309c;
+  background: #00309c; 
+
+  &--loading * {
+    cursor: progress;
+  }
 }
 
 .treasure { 
   background: #000000;
   height: 100%;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  .treasure--input {
+  &__completed-challenges,
+  &__correct {
+    color: #2dea2d;
+    text-align: center;
+  }
+
+  &__input {
     display: block;
     overflow: hidden;
     margin: 15px;
@@ -203,8 +295,9 @@
       margin-right: 0;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      height: 34px;
+      height: 44px;
       float: left;
+      width: 250px;
     }
 
     button {
@@ -215,8 +308,8 @@
       border-bottom-right-radius: 3px;
       color: #fff;
       text-transform: uppercase;
-      font-size: 9px;
-      height: 34px;
+      font-size: 12px;
+      height: 44px;
       float: left;
     }
   }
@@ -231,13 +324,25 @@
 }
 
 .app-footer {
-  background: #c3c3c3;
-  height: 35px;
+  background: rgb(39,106,221);
+  background: linear-gradient(90deg, rgba(39,106,221,1) 0%, rgba(33,92,217,1) 50%, rgba(29,78,194,1) 100%);
+  box-shadow: inset 0px 2px 2px 2px rgba(255, 255, 255, 0.2);
+  height: 44px;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 2px 5px;
+  padding: 4px 5px;
+
+  &__time {
+    position: absolute;
+    right: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 12px;
+  }
 
   &__start {
     position: relative;
@@ -285,15 +390,26 @@
   
   &__start-button {
     height: 100%;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #dfdfdf #4b4b4b #4b4b4b #dfdfdf;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 0;
+    background: #53a059;
+    background: linear-gradient(90deg, #53a059 0%, #67ad67 50%, #4f9b48 100%);
+    font-style: italic;
+    font-weight: bold;
+    color: #fff;
+    text-transform: lowercase;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 5px 24px 5px 12px;
+    box-shadow: inset 0 0 8px 4px rgba(0,0,0,.15);
     
     &:hover {
-      background-color: #a8a8a8;
+      background: darken(#53a059, 5%);
+      background: linear-gradient(90deg, darken(#53a059, 5%) 0%, darken(#67ad67, 5%) 50%, darken(#4f9b48, 5%) 100%);
     }
     &__img {
       width: 27px;
@@ -302,7 +418,7 @@
     }
     &__text {
       font-weight: bold;
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 }
@@ -318,5 +434,39 @@
 
   * {
    font-family: arial, sans-serif;
+  }
+}
+
+.login {
+  position: absolute;
+  left: 60%;
+  top: 50%;
+  width: 300px;
+  margin-left: -149px;
+  height: 66px;
+  margin-top: -33px;
+
+  &__label {
+    color: #ffffff;
+    display: block;
+  }
+
+  &__input {
+    height: 35px;
+    border: 0;
+    border-radius: 3px;
+    width: 220px;
+    margin-top: 10px;
+    padding: 0 6px;
+  }
+
+  &__button {
+    background: #53a059;
+    background: linear-gradient(90deg, #53a059 0%, #67ad67 50%, #4f9b48 100%);
+    color: #ffffff;
+    padding: 10px;
+    border: 0;
+    margin-left: 10px;
+    border-radius: 3px;
   }
 }

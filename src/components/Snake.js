@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSnake } from '../hooks/useSnake'
 
-function Snake(props) {
+function Snake({ boardSize, speed, setProps }) {
   const [playGame, setPlayGame] = useState(true);
 
-  const { boardSize, speed } = props
   const {
     snake,
     snakeMap,
@@ -48,39 +47,34 @@ function Snake(props) {
     }
   }, [alive])
   
-  useEffect(() => {
-    console.log('playGame')
-    console.log(playGame)
-    console.log(alive)
-    if(playGame === true && alive === false) {
-      console.log('hehe')
-      updateDirection('reset')
-    }
-  }, [playGame, alive, updateDirection])
-
-  let board = `score: ${score} code: ${code} \n`
+  let board = ` score: ${score} ${code && 'code: ' + code} \n`
   const [head] = snake
 
   const drawHead = () => {
     switch (direction) {
       case 'n':
-        return 'A'
+        return 'A '
       case 's':
-        return 'V'
+        return 'V '
       case 'e':
-        return '>'
+        return '> '
       case 'w':
-        return '<'
+        return '< '
       default:
         return null
     }
   }
   
+  const startGame = () => {
+    setProps({x: 28, y: 28})
+    setPlayGame(true)
+  }
+
   for (let i = boardSize.y - 1; i >= 0; i--) {
     board += ' '
     for (let j = 0; j < boardSize.x; j++) {
       if (snakeMap[j] && snakeMap[j][i]) {
-        board += j === head[0] && i === head[1] ? drawHead() : '0'
+        board += j === head[0] && i === head[1] ? drawHead() : '0 '
       } else if (food && j === food[0] && i === food[1]) {
         board += 'X '
       } else {
@@ -91,15 +85,15 @@ function Snake(props) {
   }
 
   return (
-    <>
-      {(playGame)  
-      ? <pre className="snake">{board}</pre>
-      : <div className="snake-menu">
+    <div className="snake">
+      <pre className="snake__game">{board}</pre>
+      {!playGame &&
+        <div className="snake-menu">
           <h1 className="snake-menu__heading">GAME OVER!</h1>
-          <button className="snake-menu__button" onClick={() => setPlayGame(true)}>Start game</button>
+          <button className="snake-menu__button" onClick={startGame}>Start game</button>
         </div>
       }
-    </>
+    </div>
   )
 }
 

@@ -68,7 +68,7 @@ export function useSnake(boardSize, speed) {
         if (food && equals(food, head)) {
           score++
           food = null
-          if(score > 2) code = '1337'
+          if(score >= 20) code = '5983'
         } else {
           removeFromSnakeMap(snakeMap, snake.pop())
 
