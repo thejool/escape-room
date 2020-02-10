@@ -98,7 +98,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "escape-room-knowit-20200130081837-deployment",
-					"S3Key": "amplify-builds/correctCompetitionResponse-30796841475568426c75-build.zip"
+					"S3Key": "amplify-builds/correctCompetitionResponse-2f4267414c6947646a2b-build.zip"
 				}
 			}
 		},

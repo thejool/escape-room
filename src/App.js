@@ -21,7 +21,7 @@ import Trashbin from './components/Trashbin'
 import Footer from './components/Footer'
 
 import msnIcon from './img/msn.png'
-import treasureIcon from './img/treasure_chest.svg'
+import treasureIcon from './img/treasure_chest.png'
 import snakeIcon from './img/snake.png'
 import notepadIcon from './img/notepad.png'
 import ie from './img/ie-icon.png'
@@ -34,13 +34,13 @@ import awsconfig from './aws-exports'
 Amplify.configure(awsconfig)
 Amplify.addPluggable(new AmazonAIPredictionsProvider())
 
+const teamID = uuidv1()
 const App = () => {
-  const teamID = '40d02a10-4b37-11ea-8fe3-7f4ae56393f2'
-  // const teamID = uuidv1()
-  const [teamName, setTeamName] = useState('Testar')
+  // const teamID = '40d02a10-4b37-11ea-8fe3-7f4ae56393f2'
+  const [teamName, setTeamName] = useState()
   const [disableTimer, setDisableTimer] = useState(false)
   const [boardSize, setBoardSize] = useState({x: 28, y: 28})
-  const [app, setApp] = useState()
+  const [app, setApp] = useState('loading')
   const SnakeWithWindow = withWindow(Snake)
   const PaintWithWindow = withWindow(Paint)
   const EditorWithWindow = withWindow(Editor)
@@ -104,7 +104,7 @@ const App = () => {
         <DesktopIcon 
           onClick={() => setApp('treasure')} 
           position={{x: 100, y: 20}} 
-          label="Treasure" 
+          label="Escape" 
           image={treasureIcon} />
         <DesktopIcon 
           onClick={() => setApp('developers')} 
@@ -136,7 +136,7 @@ const App = () => {
         {app === 'paint' && <PaintWithWindow label="Paint" onClose={() => setApp(null)} />}
         {app === 'notepad' && <EditorWithWindow label="Notepad" onClose={() => setApp(null)} />}
         {app === 'trashbin' && <TrashbinWithWindow label="Trashbin" onClose={() => setApp(null)} />}
-        {app === 'treasure' && <TreasureWithWindow label="Treasure" onClose={() => setApp(null)} onEscapeRoom={onEscapeRoom} teamName={teamName} teamID={teamID} />}
+        {app === 'treasure' && <TreasureWithWindow label="Escape" onClose={() => setApp(null)} onEscapeRoom={onEscapeRoom} teamName={teamName} teamID={teamID} />}
         {app === 'developers' && <InternetExplorer label="Developers" onClose={() => setApp(null)} iframe={<Developers />} />}
         {app === 'swagger' && <InternetExplorer label="Swagger" onClose={() => setApp(null)} initialAddress='https://casemysteryapi.azurewebsites.net/swagger/index.html' />}
         {app === 'instructions' && <InstructionsWithWindow label="Instructions" onClose={() => setApp(null)} />}

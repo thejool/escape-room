@@ -3,6 +3,7 @@ import Amplify, { API } from 'aws-amplify';
 
 const Treasure = ({ teamName, teamID, onEscapeRoom }) => {
   const [correctResponses, setCorrectResponses] = useState([])
+  const [loading, setLoading] = useState()
   const [value, setValue] = useState()
   const challenges = [
     'Snake',
@@ -32,19 +33,25 @@ const Treasure = ({ teamName, teamID, onEscapeRoom }) => {
     })
     return result
   }
-  const getSavedValues = useCallback(() => {
+  const getSavedValues = useCallback((onLoad) => {
+    setLoading(true)
+
     API.get('escapeRoom', '/competitions/' + teamID).then(response => {
       const result = getChallengeItems(response[0])
+      if(!onLoad && result.length === correctResponses.length) {
+        alert('Invalid code')
+      }
       setValue('')
       setCorrectResponses(result)
+      setLoading(false)
     }).catch(error => {
       setValue('')
-      console.log(error)
+      setLoading(false)
     });
-  }, [teamID])
+  }, [correctResponses.length, teamID])
 
   useEffect(() => {
-    getSavedValues()
+    getSavedValues(true)
   }, [getSavedValues])
 
 
@@ -57,9 +64,11 @@ const Treasure = ({ teamName, teamID, onEscapeRoom }) => {
       }, 
     }
 
-    API.put('escapeRoom', '/competitions', data).then(response => {
+    API.put('escapeRoom', '/competitions', data).then(() => {
       getSavedValues()
-    }).catch(console.log);
+    }).catch(() => {
+      setValue('')
+    });
   }
 
   const handleChange = (e) => {
@@ -67,12 +76,12 @@ const Treasure = ({ teamName, teamID, onEscapeRoom }) => {
   }
 
   return (
-    <div className="treasure">
+    <div className={'treasure' + (loading ? ' treasure--loading' : '')}>
       <div>
         <div className="treasure__input">
-          <input type="text" onChange={handleChange} placeholder="Code here.." />
+          <input type="text" onChange={handleChange} value={value} placeholder="Code here.." />
 
-          <button onClick={() => saveValue()}>Save</button>
+          <button onClick={() => saveValue()} disabled={loading || value === ''}>Save</button>
         </div>
         
         <div className="treasure__completed-challenges">

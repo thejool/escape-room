@@ -44,7 +44,7 @@ const LoginScreen = ({onClick, teamID, setTeamName}) => {
         <label className="login__label" htmlFor="login-teamName">Team name:</label>
         <input type="text" className="login__input" id="login-teamName" onChange={handleChange} value={value} />
 
-        <button className="login__button" onClick={saveTeamName} disabled={loading}>Save</button>
+        <button className="login__button" onClick={saveTeamName} disabled={loading || value === ''}>Save</button>
       </div>
     </div>
   )

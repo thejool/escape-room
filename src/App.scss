@@ -275,6 +275,11 @@
   align-items: center;
   justify-content: center;
 
+  &--loading,
+  &--loading * {
+    cursor: progress;
+  }
+
   &__completed-challenges,
   &__correct {
     color: #2dea2d;

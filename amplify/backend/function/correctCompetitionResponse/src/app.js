@@ -68,6 +68,21 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
+app.get(path, function(req, res) {
+  let queryParams = {
+    TableName: tableName,
+  }
+
+  dynamodb.scan(queryParams, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({error: 'Could not load items: ' + err});
+    } else {
+      res.json(data.Items);
+    }
+  });
+});
+
 app.get(path + hashKeyPath, function(req, res) {
   var condition = {}
   condition[partitionKeyName] = {
@@ -169,9 +184,11 @@ app.put(path, function(req, res) {
     teamName: req.body.teamName,
   }
 
+  let valid = false
   if(req.body.scores) {
     req.body.scores.map((score) => {
       if(correctCodes[score]) {
+        valid = true
         result[correctCodes[score]] = score
       }
     })
@@ -183,11 +200,9 @@ app.put(path, function(req, res) {
   let putItemParams = {
     TableName: tableName,
     Item: result,
-    ReturnValues: 'ALL_OLD',
   }
   dynamodb.put(putItemParams, (err, data) => {
-    console.log(data)
-    if(err) {
+    if(err || !valid) {
       res.statusCode = 500;
       res.json({error: err, url: req.url, body: req.body});
     } else{
