@@ -1,26 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Draggable from 'react-draggable'
 import { xFrameBypass } from '../helpers'
 
 xFrameBypass()
 
-const InternetExplorer = ({initialAddress = '', onClose, iframe}) => {
-  console.log('iframe')
-  console.log(iframe)
+const InternetExplorer = ({initialAddress = '', onClose, iframe, active, onClick}) => {
   const [value, setValue] = useState(initialAddress)
   const [address, setAddress] = useState(initialAddress)
+  const [onTop, setOnTop] = useState(false)
+  useEffect(() => {
+    setOnTop(active)
+  }, [active])
 
   const handleChange = (e) => {
     setValue(e.target.value)
   }
   
   const browseAddress = (e) => {
-    console.log('browseAddress')
-    console.log(e.key)
     if (e.key === 'Enter') {
       const url = e.target.value.split('//')
       const newUrl = 'https://' + url[url.length - 1]
-      console.log(newUrl)
       setAddress(newUrl)
     }
   }
@@ -30,8 +29,9 @@ const InternetExplorer = ({initialAddress = '', onClose, iframe}) => {
       handle=".internet-explorer__handle"
       defaultPosition={{ x: 110, y: 100 }}
       scale={1}
+      style={{ zIndex: onTop ? 20 : 0}}
     >
-      <div className="internet-explorer">
+      <div className="internet-explorer" onClick={onClick}>
         <div className="internet-explorer__handle">
         </div>
         

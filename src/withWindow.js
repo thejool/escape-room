@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 
-const withWindow = Window => {
-  const WithWindow = ({label, onClose, onMinimize, onMaximize, ...props}) => {
+const withWindow = (Window) => {
+  const WithWindow = ({active, onClick, label, onClose, onMinimize, onMaximize, ...props}) => {
+    const [onTop, setOnTop] = useState(false)
+    useEffect(() => {
+      console.log('setOnTop')
+      console.log(active)
+      setOnTop(active)
+    }, [active])
+
     return (
       <Draggable
         handle=".window__header__handle"
         defaultPosition={{ x: 160, y: 100 }}
         scale={1}
-        //onStart={handleStart}
-        //onDrag={handleDrag}
-        //onStop={handleStop}
+        style={{zIndex: onTop ? 20 : 0}}
       >
-        <div className="window">
+        <div className="window" onClick={onClick}>
           <header className="window__header">
             <div className="window__header__handle">
               {label}

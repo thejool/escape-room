@@ -167,12 +167,14 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
 
 app.put(path, function(req, res) {
   const correctCodes = {
-    '5983': 'Snake',
-    '8912': 'Fizz Buzz',
+    'E9L1': 'Snake',
+    '8AB1': 'Fizz Buzz',
     '0912': 'Swagger',
     '1093': 'Paint',
-    '3209': 'QR KOD',
+    'A13B': 'QR KOD',
     '8E00': 'Blue Screen',
+    'A765': 'Question',
+    'ZC19': 'Tower',
   }
 
   if (userIdPresent) {

@@ -20,6 +20,7 @@ import Treasure from './components/Treasure'
 import Trashbin from './components/Trashbin'
 import Footer from './components/Footer'
 
+import mapsIcon from './img/maps-icon.png'
 import msnIcon from './img/msn.png'
 import treasureIcon from './img/treasure_chest.png'
 import snakeIcon from './img/snake.png'
@@ -40,7 +41,8 @@ const App = () => {
   const [teamName, setTeamName] = useState()
   const [disableTimer, setDisableTimer] = useState(false)
   const [boardSize, setBoardSize] = useState({x: 28, y: 28})
-  const [app, setApp] = useState('loading')
+  const [app, setApp] = useState([])
+  const [activeApp, setActiveApp] = useState('')
   const SnakeWithWindow = withWindow(Snake)
   const PaintWithWindow = withWindow(Paint)
   const EditorWithWindow = withWindow(Editor)
@@ -70,6 +72,11 @@ const App = () => {
     setTeamID(uuidv1())
   }, [])
 
+  // useEffect(() => {
+  //   if(app.length > 0) {
+  //     setActiveApp(app[app.length - 1])
+  //   }
+  // }, [app])
 
   useEffect(() => {
     if(startTime === undefined && (app === null || app === undefined)) {
@@ -94,74 +101,152 @@ const App = () => {
 
       <section className="app-desktop">
         <DesktopIcon 
-          onClick={() => setApp('ie')} 
+          onClick={() => setApp(['ie'])} 
           position={{x: 0, y: 20}} 
           label="Internet Explorer" 
           image={ie} />
         <DesktopIcon 
-          onClick={() => setApp('bluescreen')} 
+          onClick={() => setApp(['bluescreen'])} 
           position={{x: 0, y: 130}} 
           label="MSN" 
           image={msnIcon} />
         <DesktopIcon 
-          onClick={() => setApp('snake')} 
+          onClick={() => setApp(['snake'])} 
           position={{x: 0, y: 240}} 
           label="Snake" 
           image={snakeIcon} />
         <DesktopIcon 
-          onClick={() => setApp('trashbin')} 
+          onClick={() => setApp(['trashbin'])} 
           position={{x: 0, y: 350}} 
           label="Trashbin" 
           image={trash} />
         <DesktopIcon 
-          onClick={() => setApp('paint')} 
+          onClick={() => setApp(['paint'])} 
           position={{x: 0, y: 460}} 
           label="Paint" 
           image={paint} />
         <DesktopIcon 
-          onClick={() => setApp('notepad')} 
+          onClick={() => setApp(['notepad'])} 
           position={{x: 0, y: 570}} 
           label="Notepad" 
           image={notepadIcon} />
         <DesktopIcon 
-          onClick={() => setApp('treasure')} 
+          onClick={() => setApp(['treasure'])} 
           position={{x: 100, y: 20}} 
           label="Escape" 
           image={treasureIcon} />
         <DesktopIcon 
-          onClick={() => setApp('developers')} 
+          onClick={() => setApp(['developers'])} 
           position={{x: 100, y: 130}} 
           label="Developers" 
           image={ie} />
         <DesktopIcon 
-          onClick={() => setApp('swagger')} 
+          onClick={() => setApp(['swagger'])} 
           position={{x: 100, y: 240}} 
           label="Swagger" 
           image={ie} />
         <DesktopIcon 
-          onClick={() => setApp('instructions')} 
+          onClick={() => setApp(['instructions'])} 
           position={{x: 100, y: 350}} 
           label="instructions.txt" 
           image={notepadIcon} />
         <DesktopIcon 
-          onClick={() => setApp('bluescreen')} 
+          onClick={() => setApp(['bluescreen'])} 
           position={{x: 100, y: 460}} 
           label="Files N stuff" 
           image={folder} />
+        <DesktopIcon 
+          onClick={() => window.open(
+            'https://www.google.se/maps',
+            '_blank'
+          )} 
+          position={{x: 100, y: 570}} 
+          label="Map" 
+          image={mapsIcon} />
         
-        {app === 'loading' && <LoadingScreen onClick={() => (teamName && teamID) ? setApp(null) : setApp('login')} />}
-        {app === 'login' && <LoginScreen onClick={() => setApp(null)} setTeamName={setTeamName} teamID={teamID} />}
-        {app === 'bluescreen' && <BlueScreen onClick={() => setApp(null)} />}
-        {app === 'finished' && <FinishedScreen onClick={() => setApp(null)} startTime={startTime} teamName={teamName} />}
-        {app === 'ie' && <InternetExplorer label="Knowit Trainee" onClose={() => setApp(null)} initialAddress={'https://www.knowit.se/karriar/trainee/'} />}
-        {app === 'snake' && <SnakeWithWindow setProps={setBoardSize} boardSize={boardSize} speed={180} label="Snake" onClose={() => setApp(null)} />}
-        {app === 'paint' && <PaintWithWindow label="Paint" onClose={() => setApp(null)} />}
-        {app === 'notepad' && <EditorWithWindow label="Notepad" onClose={() => setApp(null)} />}
-        {app === 'trashbin' && <TrashbinWithWindow label="Trashbin" onClose={() => setApp(null)} />}
-        {app === 'treasure' && <TreasureWithWindow label="Escape" onClose={() => setApp(null)} onEscapeRoom={onEscapeRoom} teamName={teamName} teamID={teamID} />}
-        {app === 'developers' && <InternetExplorer label="Developers" onClose={() => setApp(null)} iframe={<Developers />} />}
-        {app === 'swagger' && <InternetExplorer label="Swagger" onClose={() => setApp(null)} initialAddress='https://casemysteryapi.azurewebsites.net/swagger/index.html' />}
-        {app === 'instructions' && <InstructionsWithWindow label="Instructions" onClose={() => setApp(null)} />}
+        {app.indexOf('loading') > -1 && 
+          <LoadingScreen
+            onClick={() => (teamName && teamID) ? setApp(['loading']) : setApp(['login'])} />
+        }
+        {app.indexOf('login') > -1 && 
+          <LoginScreen
+            onClick={() => setApp(['login'])} 
+            setTeamName={setTeamName} 
+            teamID={teamID} />
+        }
+        {app.indexOf('bluescreen') > -1 && 
+          <BlueScreen
+            onClick={() => setApp(['bluescreen'])} />
+        }
+        {app.indexOf('finished') > -1 && 
+          <FinishedScreen
+            onClick={() => setApp(['finished'])} 
+            startTime={startTime} 
+            teamName={teamName} />
+        }
+        {app.indexOf('ie') > -1 && 
+          <InternetExplorer 
+            label="Knowit Trainee" 
+            onClose={() => setApp([])} 
+            onClick={() => setActiveApp('ie')} 
+            initialAddress={'https://www.knowit.se/karriar/trainee/'} />
+        }
+        {app.indexOf('snake') > -1 && 
+          <SnakeWithWindow 
+            setProps={setBoardSize} 
+            boardSize={boardSize} 
+            speed={180} 
+            label="Snake" 
+            onClose={() => setApp([])}
+            onClick={() => setActiveApp('snake')} />
+        }
+        {app.indexOf('paint') > -1 && 
+          <PaintWithWindow 
+            label="Paint" 
+            onClose={() => setApp([])}
+            onClick={() => console.log('paint')} />
+        }
+        {app.indexOf('notepad') > -1 && 
+          <EditorWithWindow 
+            label="Notepad" 
+            onClose={() => setApp([])}
+            onClick={() => console.log('notepad')} />
+        }
+        {app.indexOf('trashbin') > -1 && 
+          <TrashbinWithWindow 
+            label="Trashbin" 
+            onClose={() => setApp([])}
+            onClick={() => setActiveApp('trashbin')} />
+        }
+        {app.indexOf('treasure') > -1 && 
+          <TreasureWithWindow 
+            label="Escape" 
+            onClose={() => setApp([])} 
+            onClick={() => setActiveApp('treasure')} 
+            onEscapeRoom={onEscapeRoom} 
+            teamName={teamName} 
+            teamID={teamID} />
+        }
+        {app.indexOf('developers') > -1 && 
+          <InternetExplorer 
+            label="Developers" 
+            onClose={() => setApp([])} 
+            onClick={() => setActiveApp('developers')} 
+            iframe={<Developers />} />
+        }
+        {app.indexOf('swagger') > -1 && 
+          <InternetExplorer 
+            label="Swagger" 
+            onClose={() => setApp([])} 
+            onClick={() => setActiveApp('swagger')} 
+            initialAddress='https://casemysteryapi.azurewebsites.net/swagger/index.html' />
+        }
+        {app.indexOf('instructions') > -1 && 
+          <InstructionsWithWindow 
+            label="Instructions" 
+            onClose={() => setApp([])}
+            onClick={() => setActiveApp('instructions')} />
+        }
         
       </section>
 

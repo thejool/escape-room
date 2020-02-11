@@ -28,7 +28,7 @@ const Editor = (props) => {
       }
   
       if(valid) {
-        alert('Wohoo! Your code is: 8912')
+        alert('Wohoo! Your code is: 8AB1')
       } else {
         alert('Not correct, try again!')
       }
