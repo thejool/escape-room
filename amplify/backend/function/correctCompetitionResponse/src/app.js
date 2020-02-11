@@ -172,7 +172,7 @@ app.put(path, function(req, res) {
     '0912': 'Swagger',
     '1093': 'Paint',
     '3209': 'QR KOD',
-    '0X0000008E': 'Blue Screen',
+    '8E00': 'Blue Screen',
   }
 
   if (userIdPresent) {

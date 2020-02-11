@@ -9,7 +9,7 @@ import 'codemirror/mode/javascript/javascript'
 
 
 const Editor = (props) => {
-  const [code, setCode] = useState(`const fizzBuzz = () => {\n  // 1. Write a program that prints the numbers from 1 to 100. \n  // 2. For numbers divisible by 3, print “Fizz” \n  // 3. For numbers divisible by 5, print “Buzz” \n  // 4. For numbers divisible by both 3 and 5, print “FizzBuzz” \n  // 5. Store your results in the array by pushing them to it \n\n  const result = [] \n\n  // Your code here \n\n  return result \n} \n\n fizzBuzz()`)
+  const [code, setCode] = useState(`const fizzBuzz = () => {\n  // 1. Write a program in JAVASCRIPT that prints the numbers from 1 to 100. \n  // 2. For numbers divisible by 3, print “Fizz” \n  // 3. For numbers divisible by 5, print “Buzz” \n  // 4. For numbers divisible by both 3 and 5, print “FizzBuzz” \n  // 5. Store your results in the array by pushing them to it \n\n  const result = [] \n\n  // Your code here \n\n  return result \n} \n\n fizzBuzz()`)
 
   const options = {
     mode: 'javascript',
