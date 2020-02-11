@@ -25,6 +25,9 @@ const LoginScreen = ({onClick, teamID, setTeamName}) => {
     API.post('escapeRoom', '/competitions', data).then(response => {
       // Add your code here
       setTeamName(value)
+      var object = { lsTeamName: value, lsTeamID: teamID, timestamp: new Date().getTime()}
+      localStorage.setItem("escape-room-team", JSON.stringify(object));
+
       setLoading(false)
       onClick()
     }).catch(error => {

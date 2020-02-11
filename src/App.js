@@ -34,9 +34,9 @@ import awsconfig from './aws-exports'
 Amplify.configure(awsconfig)
 Amplify.addPluggable(new AmazonAIPredictionsProvider())
 
-const teamID = uuidv1()
 const App = () => {
   // const teamID = '40d02a10-4b37-11ea-8fe3-7f4ae56393f2'
+  const [teamID, setTeamID] = useState()
   const [teamName, setTeamName] = useState()
   const [disableTimer, setDisableTimer] = useState(false)
   const [boardSize, setBoardSize] = useState({x: 28, y: 28})
@@ -48,6 +48,28 @@ const App = () => {
   const TrashbinWithWindow = withWindow(Trashbin)
   const TreasureWithWindow = withWindow(Treasure)
   const [startTime, setStartTime] = useState()
+
+  useEffect(() => {
+    const escapeRoomTeam = JSON.parse(localStorage.getItem("escape-room-team"))
+    if(escapeRoomTeam) {
+      const { lsTeamID, lsTeamName, timestamp } = escapeRoomTeam
+      const now = new Date().getTime().toString();
+  
+      const diffTime = Math.abs(now - timestamp);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+  
+      if(diffDays < 3) {
+        setTeamID(lsTeamID)
+        setTeamName(lsTeamName)
+        return
+      } else {
+        localStorage.removeItem("escape-room-team")
+      }
+    }
+
+    setTeamID(uuidv1())
+  }, [])
+
 
   useEffect(() => {
     if(startTime === undefined && (app === null || app === undefined)) {
@@ -127,7 +149,7 @@ const App = () => {
           label="Files N stuff" 
           image={folder} />
         
-        {app === 'loading' && <LoadingScreen onClick={() => setApp('login')} />}
+        {app === 'loading' && <LoadingScreen onClick={() => (teamName && teamID) ? setApp(null) : setApp('login')} />}
         {app === 'login' && <LoginScreen onClick={() => setApp(null)} setTeamName={setTeamName} teamID={teamID} />}
         {app === 'bluescreen' && <BlueScreen onClick={() => setApp(null)} />}
         {app === 'finished' && <FinishedScreen onClick={() => setApp(null)} startTime={startTime} teamName={teamName} />}
