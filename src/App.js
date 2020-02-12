@@ -72,14 +72,8 @@ const App = () => {
     setTeamID(uuidv1())
   }, [])
 
-  // useEffect(() => {
-  //   if(app.length > 0) {
-  //     setActiveApp(app[app.length - 1])
-  //   }
-  // }, [app])
-
   useEffect(() => {
-    if(startTime === undefined && (app === null || app === undefined)) {
+    if(startTime === undefined && (app.length === 0)) {
       setStartTime(new Date())
     }
   }, [app, startTime])

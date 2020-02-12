@@ -4,11 +4,6 @@ import Draggable from 'react-draggable';
 const withWindow = (Window) => {
   const WithWindow = ({active, onClick, label, onClose, onMinimize, onMaximize, ...props}) => {
     const [onTop, setOnTop] = useState(false)
-    useEffect(() => {
-      console.log('setOnTop')
-      console.log(active)
-      setOnTop(active)
-    }, [active])
 
     return (
       <Draggable

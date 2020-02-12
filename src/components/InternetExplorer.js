@@ -8,10 +8,6 @@ const InternetExplorer = ({initialAddress = '', onClose, iframe, active, onClick
   const [value, setValue] = useState(initialAddress)
   const [address, setAddress] = useState(initialAddress)
   const [onTop, setOnTop] = useState(false)
-  useEffect(() => {
-    setOnTop(active)
-  }, [active])
-
   const handleChange = (e) => {
     setValue(e.target.value)
   }
