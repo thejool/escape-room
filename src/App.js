@@ -41,8 +41,8 @@ const App = () => {
   const [teamName, setTeamName] = useState()
   const [disableTimer, setDisableTimer] = useState(false)
   const [boardSize, setBoardSize] = useState({x: 28, y: 28})
-  const [app, setApp] = useState([])
-  const [activeApp, setActiveApp] = useState('')
+  const [app, setApp] = useState(['loading'])
+  const [activeApp, setActiveApp] = useState(['loading'])
   const SnakeWithWindow = withWindow(Snake)
   const PaintWithWindow = withWindow(Paint)
   const EditorWithWindow = withWindow(Editor)
@@ -166,17 +166,17 @@ const App = () => {
         
         {app.indexOf('loading') > -1 && 
           <LoadingScreen
-            onClick={() => (teamName && teamID) ? setApp(['loading']) : setApp(['login'])} />
+            onClick={() => (teamName && teamID) ? setApp([]) : setApp(['login'])} />
         }
         {app.indexOf('login') > -1 && 
           <LoginScreen
-            onClick={() => setApp(['login'])} 
+            onClick={() => setApp([])} 
             setTeamName={setTeamName} 
             teamID={teamID} />
         }
         {app.indexOf('bluescreen') > -1 && 
           <BlueScreen
-            onClick={() => setApp(['bluescreen'])} />
+            onClick={() => setApp([])} />
         }
         {app.indexOf('finished') > -1 && 
           <FinishedScreen
