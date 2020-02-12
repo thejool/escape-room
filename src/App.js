@@ -174,7 +174,7 @@ const App = () => {
         }
         {app.indexOf('finished') > -1 && 
           <FinishedScreen
-            onClick={() => setApp(['finished'])} 
+            onClick={() => setApp([])} 
             startTime={startTime} 
             teamName={teamName} />
         }
