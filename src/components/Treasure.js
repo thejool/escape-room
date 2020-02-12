@@ -12,6 +12,8 @@ const Treasure = ({ teamName, teamID, onEscapeRoom }) => {
     'Paint',
     'QR KOD',
     'Blue Screen',
+    'Question',
+    'Tower',
   ]
 
   useEffect(() => {
